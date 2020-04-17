@@ -6382,19 +6382,38 @@ var $author$project$Tests$gibberish = F2(
 var $author$project$Tests$gibberishQuestion = function (length) {
 	return A2($author$project$Tests$gibberish, length, $author$project$Tests$anyCharacter) + '?';
 };
-var $elm$core$Debug$todo = _Debug_todo;
+var $elm$core$String$length = _String_length;
+var $elm$core$String$slice = _String_slice;
+var $elm$core$String$right = F2(
+	function (n, string) {
+		return (n < 1) ? '' : A3(
+			$elm$core$String$slice,
+			-n,
+			$elm$core$String$length(string),
+			string);
+	});
+var $elm$core$String$toLower = _String_toLower;
+var $elm$core$String$toUpper = _String_toUpper;
 var $author$project$Bob$hey = function (remark) {
-	return _Debug_todo(
-		'Bob',
-		{
-			start: {line: 6, column: 5},
-			end: {line: 6, column: 15}
-		})('Please implement this function');
+	var trimedRemark = $elm$core$String$trim(remark);
+	var theEndChar = A2($elm$core$String$right, 1, trimedRemark);
+	switch (theEndChar) {
+		case '?':
+			return (_Utils_eq(
+				$elm$core$String$toUpper(trimedRemark),
+				trimedRemark) && (!_Utils_eq(
+				$elm$core$String$toLower(trimedRemark),
+				trimedRemark))) ? 'Calm down, I know what I\'m doing!' : 'Sure.';
+		case '':
+			return 'Fine. Be that way!';
+		default:
+			return (_Utils_eq(
+				$elm$core$String$toUpper(trimedRemark),
+				trimedRemark) && (!_Utils_eq(
+				$elm$core$String$toLower(trimedRemark),
+				trimedRemark))) ? 'Whoa, chill out!' : 'Whatever.';
+	}
 };
-var $elm_explorations$test$Test$Internal$Skipped = function (a) {
-	return {$: 'Skipped', a: a};
-};
-var $elm_explorations$test$Test$skip = $elm_explorations$test$Test$Internal$Skipped;
 var $elm_explorations$test$Test$Internal$blankDescriptionFailure = $elm_explorations$test$Test$Internal$failNow(
 	{
 		description: 'This test has a blank description. Let\'s give it a useful one!',
@@ -6432,280 +6451,253 @@ var $author$project$Tests$tests = A2(
 					'Whatever.',
 					$author$project$Bob$hey('Tom-ay-to, tom-aaaah-to.'));
 			}),
-			$elm_explorations$test$Test$skip(
 			A2(
-				$elm_explorations$test$Test$test,
-				'shouting',
-				function (_v1) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whoa, chill out!',
-						$author$project$Bob$hey('WATCH OUT!'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'shouting',
+			function (_v1) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whoa, chill out!',
+					$author$project$Bob$hey('WATCH OUT!'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'shouting gibberish',
-				function (_v2) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whoa, chill out!',
-						$author$project$Bob$hey(
-							$author$project$Tests$uppercaseGibberish(10)));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'shouting gibberish',
+			function (_v2) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whoa, chill out!',
+					$author$project$Bob$hey(
+						$author$project$Tests$uppercaseGibberish(10)));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'asking a question',
-				function (_v3) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Sure.',
-						$author$project$Bob$hey('Does this cryogenic chamber make me look fat?'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'asking a question',
+			function (_v3) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Sure.',
+					$author$project$Bob$hey('Does this cryogenic chamber make me look fat?'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'asking a numeric question',
-				function (_v4) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Sure.',
-						$author$project$Bob$hey('You are, what, like 15?'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'asking a numeric question',
+			function (_v4) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Sure.',
+					$author$project$Bob$hey('You are, what, like 15?'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'asking gibberish',
-				function (_v5) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Sure.',
-						$author$project$Bob$hey(
-							$author$project$Tests$gibberishQuestion(20)));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'asking gibberish',
+			function (_v5) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Sure.',
+					$author$project$Bob$hey(
+						$author$project$Tests$gibberishQuestion(20)));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'talking forcefully',
-				function (_v6) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whatever.',
-						$author$project$Bob$hey('Let\'s go make out behind the gym!'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'talking forcefully',
+			function (_v6) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whatever.',
+					$author$project$Bob$hey('Let\'s go make out behind the gym!'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'using acronyms in regular speech',
-				function (_v7) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whatever.',
-						$author$project$Bob$hey('It\'s OK if you don\'t want to go to the DMV.'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'using acronyms in regular speech',
+			function (_v7) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whatever.',
+					$author$project$Bob$hey('It\'s OK if you don\'t want to go to the DMV.'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'forceful questions',
-				function (_v8) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Calm down, I know what I\'m doing!',
-						$author$project$Bob$hey('WHAT THE HELL WERE YOU THINKING?'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'forceful questions',
+			function (_v8) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Calm down, I know what I\'m doing!',
+					$author$project$Bob$hey('WHAT THE HELL WERE YOU THINKING?'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'shouting numbers',
-				function (_v9) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whoa, chill out!',
-						$author$project$Bob$hey('1, 2, 3 GO!'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'shouting numbers',
+			function (_v9) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whoa, chill out!',
+					$author$project$Bob$hey('1, 2, 3 GO!'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'only numbers',
-				function (_v10) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whatever.',
-						$author$project$Bob$hey('1, 2, 3'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'only numbers',
+			function (_v10) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whatever.',
+					$author$project$Bob$hey('1, 2, 3'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'question with only numbers',
-				function (_v11) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Sure.',
-						$author$project$Bob$hey('4?'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'question with only numbers',
+			function (_v11) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Sure.',
+					$author$project$Bob$hey('4?'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'shouting with special characters',
-				function (_v12) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whoa, chill out!',
-						$author$project$Bob$hey('ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'shouting with special characters',
+			function (_v12) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whoa, chill out!',
+					$author$project$Bob$hey('ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'shouting with no exclamation mark',
-				function (_v13) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whoa, chill out!',
-						$author$project$Bob$hey('I HATE YOU'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'shouting with no exclamation mark',
+			function (_v13) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whoa, chill out!',
+					$author$project$Bob$hey('I HATE YOU'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'statement containing a question mark',
-				function (_v14) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whatever.',
-						$author$project$Bob$hey('Ending with ? means a question.'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'statement containing a question mark',
+			function (_v14) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whatever.',
+					$author$project$Bob$hey('Ending with ? means a question.'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'prattling on',
-				function (_v15) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Sure.',
-						$author$project$Bob$hey('Wait! Hang on. Are you going to be OK?'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'prattling on',
+			function (_v15) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Sure.',
+					$author$project$Bob$hey('Wait! Hang on. Are you going to be OK?'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'silence',
-				function (_v16) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Fine. Be that way!',
-						$author$project$Bob$hey(''));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'silence',
+			function (_v16) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Fine. Be that way!',
+					$author$project$Bob$hey(''));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'prolonged silence',
-				function (_v17) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Fine. Be that way!',
-						$author$project$Bob$hey('       '));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'prolonged silence',
+			function (_v17) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Fine. Be that way!',
+					$author$project$Bob$hey('       '));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'alternate silences',
-				function (_v18) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Fine. Be that way!',
-						$author$project$Bob$hey('\t  \n  \t   '));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'alternate silences',
+			function (_v18) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Fine. Be that way!',
+					$author$project$Bob$hey('\t  \n  \t   '));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'on multiple line questions',
-				function (_v19) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whatever.',
-						$author$project$Bob$hey('\nDoes this cryogenic chamber make me look fat?\nno'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'on multiple line questions',
+			function (_v19) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whatever.',
+					$author$project$Bob$hey('\nDoes this cryogenic chamber make me look fat?\nno'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'ending with whitespace',
-				function (_v20) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Sure.',
-						$author$project$Bob$hey('Okay if like my  spacebar  quite a bit?   '));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'ending with whitespace',
+			function (_v20) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Sure.',
+					$author$project$Bob$hey('Okay if like my  spacebar  quite a bit?   '));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'no letters',
-				function (_v21) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whatever.',
-						$author$project$Bob$hey('1, 2, 3'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'no letters',
+			function (_v21) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whatever.',
+					$author$project$Bob$hey('1, 2, 3'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'question with no letters',
-				function (_v22) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Sure.',
-						$author$project$Bob$hey('4?'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'question with no letters',
+			function (_v22) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Sure.',
+					$author$project$Bob$hey('4?'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'statement containing question mark',
-				function (_v23) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whatever.',
-						$author$project$Bob$hey('Ending with ? means a question.'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'statement containing question mark',
+			function (_v23) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whatever.',
+					$author$project$Bob$hey('Ending with ? means a question.'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'non-letters with question',
-				function (_v24) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Sure.',
-						$author$project$Bob$hey(':) ?'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'non-letters with question',
+			function (_v24) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Sure.',
+					$author$project$Bob$hey(':) ?'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'starting with whitespace',
-				function (_v25) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whatever.',
-						$author$project$Bob$hey('         hmmmmmmm...'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'starting with whitespace',
+			function (_v25) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whatever.',
+					$author$project$Bob$hey('         hmmmmmmm...'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'other whitespace',
-				function (_v26) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Fine. Be that way!',
-						$author$project$Bob$hey('\n\u000D \t'));
-				})),
-			$elm_explorations$test$Test$skip(
+			$elm_explorations$test$Test$test,
+			'other whitespace',
+			function (_v26) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Fine. Be that way!',
+					$author$project$Bob$hey('\n\u000D \t'));
+			}),
 			A2(
-				$elm_explorations$test$Test$test,
-				'non-question ending with whitespace',
-				function (_v27) {
-					return A2(
-						$elm_explorations$test$Expect$equal,
-						'Whatever.',
-						$author$project$Bob$hey('This is a statement ending with whitespace      '));
-				}))
+			$elm_explorations$test$Test$test,
+			'non-question ending with whitespace',
+			function (_v27) {
+				return A2(
+					$elm_explorations$test$Expect$equal,
+					'Whatever.',
+					$author$project$Bob$hey('This is a statement ending with whitespace      '));
+			})
 		]));
-var $author$project$Test$Generated$Main4236745131$main = A2(
+var $author$project$Test$Generated$Main2846479109$main = A2(
 	$author$project$Test$Runner$Node$run,
 	{
 		paths: _List_fromArray(
@@ -6713,7 +6705,7 @@ var $author$project$Test$Generated$Main4236745131$main = A2(
 		processes: 8,
 		report: $author$project$Test$Reporter$Reporter$ConsoleReport($author$project$Console$Text$UseColor),
 		runs: $elm$core$Maybe$Nothing,
-		seed: 399577239468035
+		seed: 189186478008732
 	},
 	$elm_explorations$test$Test$concat(
 		_List_fromArray(
@@ -6724,10 +6716,10 @@ var $author$project$Test$Generated$Main4236745131$main = A2(
 				_List_fromArray(
 					[$author$project$Tests$tests]))
 			])));
-_Platform_export({'Test':{'Generated':{'Main4236745131':{'init':$author$project$Test$Generated$Main4236745131$main($elm$json$Json$Decode$int)(0)}}}});}(this));
+_Platform_export({'Test':{'Generated':{'Main2846479109':{'init':$author$project$Test$Generated$Main2846479109$main($elm$json$Json$Decode$int)(0)}}}});}(this));
 return this.Elm;
 })({});
-var pipeFilename = "/tmp/elm_test-97448.sock";
+var pipeFilename = "/tmp/elm_test-57418.sock";
 // Make sure necessary things are defined.
 if (typeof Elm === "undefined") {
   throw "test runner config error: Elm is not defined. Make sure you provide a file compiled by Elm!";
