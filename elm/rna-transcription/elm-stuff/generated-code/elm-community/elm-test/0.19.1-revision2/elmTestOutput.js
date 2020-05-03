@@ -6312,13 +6312,6 @@ var $elm_explorations$test$Expect$equateWith = F4(
 		return usesFloats ? $elm_explorations$test$Expect$fail(floatError) : A5($elm_explorations$test$Expect$testWith, $elm_explorations$test$Test$Runner$Failure$Equality, reason, comparison, b, a);
 	});
 var $elm_explorations$test$Expect$equal = A2($elm_explorations$test$Expect$equateWith, 'Expect.equal', $elm$core$Basics$eq);
-var $author$project$Leap$isDivisible = F2(
-	function (num, year) {
-		return (!(year % num)) ? true : false;
-	});
-var $author$project$Leap$isLeapYear = function (year) {
-	return A2($author$project$Leap$isDivisible, 4, year) && ((!A2($author$project$Leap$isDivisible, 100, year)) || A2($author$project$Leap$isDivisible, 400, year));
-};
 var $elm_explorations$test$Test$Internal$blankDescriptionFailure = $elm_explorations$test$Test$Internal$failNow(
 	{
 		description: 'This test has a blank description. Let\'s give it a useful one!',
@@ -6338,84 +6331,91 @@ var $elm_explorations$test$Test$test = F2(
 						]);
 				}));
 	});
+var $elm$core$String$replace = F3(
+	function (before, after, string) {
+		return A2(
+			$elm$core$String$join,
+			after,
+			A2($elm$core$String$split, before, string));
+	});
+var $elm$core$String$toUpper = _String_toUpper;
+var $author$project$RNATranscription$toRNA = function (dna) {
+	return $elm$core$Result$Ok(
+		$elm$core$String$toUpper(
+			A3(
+				$elm$core$String$replace,
+				'A',
+				'U',
+				A3(
+					$elm$core$String$replace,
+					'T',
+					'a',
+					A3(
+						$elm$core$String$replace,
+						'C',
+						'g',
+						A3($elm$core$String$replace, 'G', 'c', dna))))));
+};
 var $author$project$Tests$tests = A2(
 	$elm_explorations$test$Test$describe,
-	'Leap',
+	'RNATranscription',
 	_List_fromArray(
 		[
 			A2(
 			$elm_explorations$test$Test$test,
-			'leap year',
+			'complement of cytosine is guanine',
 			function (_v0) {
 				return A2(
 					$elm_explorations$test$Expect$equal,
-					true,
-					$author$project$Leap$isLeapYear(1996));
+					$elm$core$Result$Ok('G'),
+					$author$project$RNATranscription$toRNA('C'));
 			}),
 			A2(
 			$elm_explorations$test$Test$test,
-			'non-leap year',
+			'complement of guanine is cytosine',
 			function (_v1) {
 				return A2(
 					$elm_explorations$test$Expect$equal,
-					false,
-					$author$project$Leap$isLeapYear(1997));
+					$elm$core$Result$Ok('C'),
+					$author$project$RNATranscription$toRNA('G'));
 			}),
 			A2(
 			$elm_explorations$test$Test$test,
-			'non-leap even year',
+			'complement of thymine is adenine',
 			function (_v2) {
 				return A2(
 					$elm_explorations$test$Expect$equal,
-					false,
-					$author$project$Leap$isLeapYear(1998));
+					$elm$core$Result$Ok('A'),
+					$author$project$RNATranscription$toRNA('T'));
 			}),
 			A2(
 			$elm_explorations$test$Test$test,
-			'century',
+			'complement of adenine is uracil',
 			function (_v3) {
 				return A2(
 					$elm_explorations$test$Expect$equal,
-					false,
-					$author$project$Leap$isLeapYear(1900));
+					$elm$core$Result$Ok('U'),
+					$author$project$RNATranscription$toRNA('A'));
 			}),
 			A2(
 			$elm_explorations$test$Test$test,
-			'second century',
+			'complement',
 			function (_v4) {
 				return A2(
 					$elm_explorations$test$Expect$equal,
-					false,
-					$author$project$Leap$isLeapYear(1800));
-			}),
-			A2(
-			$elm_explorations$test$Test$test,
-			'fourth century',
-			function (_v5) {
-				return A2(
-					$elm_explorations$test$Expect$equal,
-					true,
-					$author$project$Leap$isLeapYear(2400));
-			}),
-			A2(
-			$elm_explorations$test$Test$test,
-			'y2k',
-			function (_v6) {
-				return A2(
-					$elm_explorations$test$Expect$equal,
-					true,
-					$author$project$Leap$isLeapYear(2000));
+					$elm$core$Result$Ok('UGCACCAGAAUU'),
+					$author$project$RNATranscription$toRNA('ACGTGGTCTTAA'));
 			})
 		]));
-var $author$project$Test$Generated$Main1591995351$main = A2(
+var $author$project$Test$Generated$Main2291820088$main = A2(
 	$author$project$Test$Runner$Node$run,
 	{
 		paths: _List_fromArray(
-			['/Users/kawamura/Exercism/elm/leap/tests/Tests.elm']),
+			['/Users/kawamura/Exercism/elm/rna-transcription/tests/Tests.elm']),
 		processes: 8,
 		report: $author$project$Test$Reporter$Reporter$ConsoleReport($author$project$Console$Text$UseColor),
 		runs: $elm$core$Maybe$Nothing,
-		seed: 52399722681932
+		seed: 313275989591297
 	},
 	$elm_explorations$test$Test$concat(
 		_List_fromArray(
@@ -6426,10 +6426,10 @@ var $author$project$Test$Generated$Main1591995351$main = A2(
 				_List_fromArray(
 					[$author$project$Tests$tests]))
 			])));
-_Platform_export({'Test':{'Generated':{'Main1591995351':{'init':$author$project$Test$Generated$Main1591995351$main($elm$json$Json$Decode$int)(0)}}}});}(this));
+_Platform_export({'Test':{'Generated':{'Main2291820088':{'init':$author$project$Test$Generated$Main2291820088$main($elm$json$Json$Decode$int)(0)}}}});}(this));
 return this.Elm;
 })({});
-var pipeFilename = "/tmp/elm_test-2347.sock";
+var pipeFilename = "/tmp/elm_test-3687.sock";
 // Make sure necessary things are defined.
 if (typeof Elm === "undefined") {
   throw "test runner config error: Elm is not defined. Make sure you provide a file compiled by Elm!";
